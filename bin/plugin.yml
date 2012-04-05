@@ -1,0 +1,20 @@
+name: PortalAlert
+main: me.goodyou10.PortalAlert.PortalAlert
+version: 1.3
+dev-url: http://dev.bukkit.org/server-mods/portalalert/
+permissions:
+    portalalert.*:
+        description: Gives access to PortalAlert functions
+        children:
+            portalalert.allowportal: true
+            portalalert.recieve: true
+    portalalert.allowportal:
+        description: Allows you to use a portal
+        default: true
+    portalalert.recieve:
+        description: Allows you to recieve admin messages
+        default: op
+commands:
+    portalalert:
+        description: All PortalAlert commands
+        usage: /portalalert [reload/version]
