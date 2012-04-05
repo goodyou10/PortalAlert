@@ -1,0 +1,25 @@
+# 
+# PortalAlert main configuration file
+# 
+# This is the global configuration file. Anything placed into here will
+# be applied to the whole server.
+# 
+# About editing this file:
+# - DO NOT USE TABS. You MUST use spaces or Bukkit will complain. If
+#   you use an editor like Notepad++ (recommended for Windows users), you
+#   must configure it to "replace tabs with spaces." In Notepad++, this can
+#   be changed in Settings > Preferences > Language Menu.
+# - If you want to check the format of this file before putting it
+#   into PortalAlert, paste it into http://yaml-online-parser.appspot.com/
+#   and see if it gives ERROR:.
+# - Lines starting with # are comments and so they are ignored.
+# - {PLAYERNAME} will be replaced with the player's name.
+
+message:
+  cancel:
+    player: You are not allowed to travel through portals!
+    console: '{PLAYERNAME} tried to use a portal!'
+  portal:
+    player: You have entered a portal and have been teleported to a different world!
+    admin: '{PLAYERNAME} has entered a portal and has been teleported to a different
+      world!'
