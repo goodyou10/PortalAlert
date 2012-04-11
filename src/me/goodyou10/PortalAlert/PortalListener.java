@@ -18,38 +18,41 @@ public class PortalListener implements Listener {
 				.registerEvents(this, this.plugin);
 	}
 
-	@EventHandler
+	@EventHandler(ignoreCancelled = true)
 	public void onPlayerPortal(PlayerPortalEvent event) {
 		// Get the player
 		Player eventPlayer = event.getPlayer();
 		String playername = eventPlayer.getName();
+		int x = event.getFrom().getBlockX();
+		int y = event.getFrom().getBlockY();
+		int z = event.getFrom().getBlockZ();
 
 		// Are they allowed to travel through portals?
 		if (!eventPlayer.hasPermission("portalalert.allowportal")) {
 			event.setCancelled(true);
 			eventPlayer.sendMessage(ChatColor.RED
 					+ "[PortalAlert] "
-					+ PortalAlert.cancel_player.replaceAll("\\{PLAYERNAME\\}",
-							playername));
-			plugin.logInfo(PortalAlert.cancel_console.replaceAll(
-					"\\{PLAYERNAME\\}", playername));
+					+ plugin.replace(PortalAlert.cancel_player, playername, x,
+							y, z));
+			plugin.logInfo(plugin.replace(PortalAlert.cancel_console,
+					playername, x, y, z));
 			return;
 		}
 
 		// Send the player a message
-		eventPlayer.sendMessage(PortalAlert.portal_player.replaceAll(
-				"\\{PLAYERNAME\\}", playername));
+		eventPlayer.sendMessage(plugin.replace(PortalAlert.portal_player,
+				playername, x, y, z));
 
 		// Send message to all players with the permission
 		for (Player player : plugin.getServer().getOnlinePlayers()) {
 			if (player.hasPermission("portalalert.recieve")) {
 				player.sendMessage(ChatColor.GREEN
 						+ "[PortalAlert] "
-						+ PortalAlert.portal_admins.replaceAll(
-								"\\{PLAYERNAME\\}", playername));
+						+ plugin.replace(PortalAlert.portal_admins, playername,
+								x, y, z));
 			}
 		}
-		plugin.logInfo(PortalAlert.portal_admins.replaceAll("\\{PLAYERNAME\\}",
-				playername));
+		plugin.logInfo(plugin.replace(PortalAlert.portal_admins, playername, x,
+				y, z));
 	}
 }

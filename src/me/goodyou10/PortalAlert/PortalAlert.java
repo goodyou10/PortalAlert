@@ -12,7 +12,7 @@ public class PortalAlert extends JavaPlugin {
 	Logger log = Logger.getLogger("Minecraft");
 	private CMDExecutor cmdExecutor;
 
-	public static double Version = 1.31;
+	public static double Version = 1.32;
 	public static String cancel_player;
 	public static String cancel_console;
 	public static String portal_player;
@@ -21,7 +21,7 @@ public class PortalAlert extends JavaPlugin {
 	public void onEnable() {
 		// Load the config
 		this.loadConfig();
-		
+
 		// Load the listener
 		new PortalListener(this);
 
@@ -51,17 +51,23 @@ public class PortalAlert extends JavaPlugin {
 		}
 		config.options().copyDefaults();
 		this.saveDefaultConfig();
-		
+
 		cancel_player = config.getString("message.cancel.player",
 				"You are not allowed to travel through portals!");
 		cancel_console = config.getString("message.cancel.console",
-				"{PLAYERNAME} tried to use a portal!");
+				"{PLAYERNAME} tried to use a portal at x:{X} y:{Y} z:{Z}!");
 		portal_player = config
 				.getString("message.portal.player",
 						"You have entered a portal and have been teleported to a different world!");
-		portal_admins = config
-				.getString(
-						"message.portal.admin",
-						"{PLAYERNAME} has entered a portal and has been teleported to a different world!");
+		portal_admins = config.getString("message.portal.admin",
+				"{PLAYERNAME} has entered a portal at x:{X} y:{Y} z:{Z}");
+	}
+
+	public String replace(String str, String playername, int x, int y, int z) {
+		str = str.replaceAll("\\{PLAYERNAME\\}", playername);
+		str = str.replaceAll("\\{X\\}", Integer.toString(x));
+		str = str.replaceAll("\\{Y\\}", Integer.toString(y));
+		str = str.replaceAll("\\{Z\\}", Integer.toString(z));
+		return str;
 	}
 }

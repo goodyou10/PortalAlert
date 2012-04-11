@@ -18,8 +18,7 @@
 message:
   cancel:
     player: You are not allowed to travel through portals!
-    console: '{PLAYERNAME} tried to use a portal!'
+    console: '{PLAYERNAME} tried to use a portal at x:{X} y:{Y} z:{Z}!'
   portal:
     player: You have entered a portal and have been teleported to a different world!
-    admin: '{PLAYERNAME} has entered a portal and has been teleported to a different
-      world!'
+    admin: '{PLAYERNAME} has entered a portal at x:{X} y:{Y} z:{Z}'
